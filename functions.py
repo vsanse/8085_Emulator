@@ -3,28 +3,37 @@ import validate
 import set_flags
 
 def ADD(reg):
-    t = int(registers.reg.get("A"),16) + int(registers.reg.get(reg),16)
+    a = int(registers.reg.get("A"),16)
+    b = int(registers.reg.get(reg),16)
+    t = a + b
     if not validate.validate_data(t):
         print "\n////-----OverFlow Detected----////\n"
         t = format(t,"02x")
+        set_flags.setCarry(t)
+        set_flags.setFlags(a,b,t[1:],isAbnormalFlow=True)
         tmp = {"A": t[1:]}
     else:
         t = format(t, "02x")
-
         tmp = {"A": t}
+        set_flags.setFlags(a,b,t)
     registers.reg.update(tmp)
 
 
 def SUB(reg):
-    t = int(registers.reg.get("A"),16) - int(registers.reg.get(reg),16)
-    print t
+    a = int(registers.reg.get("A"),16)
+    b = int(registers.reg.get(reg),16)
+    t = a - b
     if not validate.validate_data(t):
         print "\n////-----UnderFlow Detected----////\n"
         t = format(t,"02x")
+        set_flags.setCarry(t)
+        set_flags.setFlags(a, b, t[1:], isAbnormalFlow=True)
         tmp = {"A": t[1:]}
     else:
         t = format(t, "02x")
+        set_flags.setFlags(t)
         tmp = {"A": t}
+        set_flags.setFlags(a,b,t)
     registers.reg.update(tmp)
 
 

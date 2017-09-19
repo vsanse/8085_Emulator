@@ -10,7 +10,7 @@ def setZero(result):
 
 
 def setCarry(result):
-    if not validate.validate_data(result):
+    if not validate.validate_data(int(result,16)):
         registers.flag.update({"CY":1})
     else:
         registers.flag.update({"CY": 0})
@@ -18,13 +18,17 @@ def setCarry(result):
 
 def setParity(result):
     parity = result.count("1")
+    print parity
     if parity%2 == 0:
         registers.flag.update({"P":1})
     else:
         registers.flag.update({"P": 0})
 
-def setAC(result):
-    pass
+def setAC(res1, res2):
+    if res1+res2 > 15:
+        registers.flag.update({"AC":1})
+    else:
+        registers.flag.update({"AC":0})
 
 
 def setSign(result):
@@ -41,12 +45,11 @@ def bcd(result):
     lN_bin = format(int(lowerNibble, 16), "04b")
     return (uN_bin+lN_bin)
 
-def setFlags(result):
+def setFlags(res1, res2, result, isAbnormalFlow = False):
     result_bcd = bcd(result)
     setZero(result)
-    setCarry(result)
+    if not isAbnormalFlow:
+        setCarry(result)
     setParity(result_bcd)
-    setAC(result)
+    setAC(res1,res2)
     setSign(result_bcd)
-
-setParity(bcd("12"))
