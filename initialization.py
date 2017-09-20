@@ -1,8 +1,7 @@
+import instruction_sizes
+import registers
 import sel_cmd
 import validate
-import registers
-import instruction_sizes
-import display
 
 
 def read_program(mem):
@@ -18,11 +17,12 @@ def read_program(mem):
             mem_int+=instruction_sizes.getSize(t[1])
             mem = format(mem_int,"0x")
         elif len(t) == 2 or len(t) == 1:
-            if t[0] == "HLT":
-                hlt_mem = mem
             registers.memory[mem] = line.strip()
             mem_int += instruction_sizes.getSize(t[0])
             mem = format(mem_int, "0x")
+            if t[0] == "HLT":
+                hlt_mem = mem
+                break
     if not hlt_mem:
         print "Please Add HLT Into Program!!!"
         exit(1)

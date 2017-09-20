@@ -1,8 +1,7 @@
-import registers
-import validate
-import set_flags
 import extras
-import display
+import registers
+import set_flags
+import validate
 
 
 #####################################################
@@ -51,7 +50,7 @@ def SUB(register):
 
 
 #####################################################
-#  REGISTER-REGISTER | REGISTER-MEMORY MOVEMENT     #
+#               LOAD AND STORE                      #
 #####################################################
 
 def MOV(reg1, reg2):
@@ -100,6 +99,7 @@ def MVI(reg, data):
         registers.reg[reg] = data
     else: print "Invalid Register"
 
+
 def LXI(register, data):
     if validate.validate_reg(register):
         registers.reg[register] = data[0:2]
@@ -107,6 +107,30 @@ def LXI(register, data):
     else:
         print "Invalid Register",register
         exit(1)
+
+
+def LHLD(addr):
+    if extras.chkMemory(addr) and extras.chkMemory(str(int(addr) + 1)):
+        registers.reg['L'] = registers.memory[addr]
+        registers.reg['H'] = registers.memory[str(int(addr) + 1)]
+    else:
+        print "Pointing Invalid Memory:", addr
+
+
+def SHLD(mem):
+    a = extras.getPair('H', 'L')
+    registers.memory[mem] = a
+
+
+def XCHG():
+    registers.reg['D'], registers.reg['H'] = registers.reg['H'], registers.reg['D']
+    registers.reg['E'], registers.reg['L'] = registers.reg['L'], registers.reg['E']
+
+
+def STAX(register):
+    if validate.validate_reg(register):
+        a = extras.getPair(register, registers.reg_pair[register])
+        registers.memory[a] = registers.reg['A']
 
 
 #####################################################
@@ -119,7 +143,3 @@ def SET(addr, data):
     else:
         print "Data Invalid.\nPlease Enter Valid Data at Memory Location: %s"%addr
         exit(1)
-
-
-def HLT():
-    return False

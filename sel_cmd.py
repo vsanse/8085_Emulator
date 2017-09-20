@@ -1,7 +1,9 @@
-import functions
 import display
-import registers
+import functions
 import instruction_sizes
+import registers
+
+
 def select(cmd):
     cmd = cmd.strip().split(" ")
     if cmd[0] == "LDA":
@@ -21,6 +23,18 @@ def select(cmd):
     elif cmd[0] == "LXI":
         operand = cmd[1].strip().split(",")
         functions.LXI(operand[0],operand[1].strip())
+
+    elif cmd[0] == "LHLD":
+        functions.LHLD(cmd[1])
+
+    elif cmd[0] == "SHLD":
+        functions.SHLD(cmd[1])
+
+    elif cmd[0] == "XCHG":
+        functions.XCHG()
+
+    elif cmd[0] == "STAX":
+        functions.STAX(cmd[1])
 
     elif cmd[0] == "ADD":
         functions.ADD(cmd[1])
