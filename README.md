@@ -9,7 +9,7 @@ Branching - JMP , JC , JNC , JZ , JNZ
 One Additional command SET has been made to set data into valid memory locations (Eg - SET 2500,0A )  
 The program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only
 
-## How This Work
+## How This Works
 Emulator uses python-2 as a backend to perform all operations.
 Registers as well as flags and memory is taken as ordered dictionary.
 ### To run program:
