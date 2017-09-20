@@ -1,6 +1,7 @@
 import functions
 import display
-
+import registers
+import instruction_sizes
 def select(cmd):
     cmd = cmd.strip().split(" ")
     if cmd[0] == "LDA":
@@ -21,5 +22,15 @@ def select(cmd):
 
     elif cmd[0] == "HLT":
         display.show()
+        exit(1)
 
-# def
+
+def start_exec(mem):
+
+    while True:
+        cmd = registers.memory.get(mem)
+        t = cmd.strip().split(" ")
+        mem_int = int(mem, 16)
+        mem_int+=instruction_sizes.getSize(t[0])
+        mem = format(mem_int, "0x")
+        select(cmd)

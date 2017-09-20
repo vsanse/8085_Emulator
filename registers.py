@@ -1,7 +1,36 @@
-reg = {'A':0, 'B':0, 'C':0, 'D':0, 'E':0, 'H':0, 'L': 0 }
-reg_pair = { 'H':'L', 'B':'C', 'D':'E', 'A':'F' }
-flag = {'S': 0, 'Z': 0, 'AC': 0, 'P': 0,'CY':0}
+from collections import OrderedDict as oDict
+
+# REGISTERS
+reg = oDict()
+reg['A'] = 0
+reg['B'] = 0
+reg['C'] = 0
+reg['D'] = 0
+reg['E'] = 0
+reg['H'] = 0
+reg['L'] = 0
+
+# REGISTER PAIRS
+reg_pair = oDict()
+reg_pair['H'] = 'L'
+reg_pair['B'] = 'C'
+reg_pair['D'] = 'E'
+reg_pair['A'] = 'F'
+
+# FLAGS
+flag = oDict()
+flag['S'] = 0
+flag['Z'] = 0
+flag['AC'] = 0
+flag['P'] = 0
+flag['CY'] = 0
+
+# COUNTERS
 PC = 0
 SP = 0
-memory = {}
-label = {}
+
+# MEMORY
+memory = oDict()
+
+# LABELS
+label = oDict()
