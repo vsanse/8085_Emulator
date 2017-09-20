@@ -13,14 +13,14 @@ def read_program(mem):
         mem_int = int(mem,16)
         t = line.strip().split(" ")
         if len(t) == 3 and t[0][-1:] == ":":
-            registers.label.update({t[0][:-1]:mem})
-            registers.memory.update({mem:(t[1]+" "+t[2])})
+            registers.label[t[0][:-1]]=mem
+            registers.memory[mem] = t[1]+" "+t[2]
             mem_int+=instruction_sizes.getSize(t[1])
             mem = format(mem_int,"0x")
         elif len(t) == 2 or len(t) == 1:
             if t[0] == "HLT":
                 hlt_mem = mem
-            registers.memory.update({mem:line.strip()})
+            registers.memory[mem] = line.strip()
             mem_int += instruction_sizes.getSize(t[0])
             mem = format(mem_int, "0x")
     if not hlt_mem:

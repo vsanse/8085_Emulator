@@ -18,7 +18,6 @@ def setCarry(result):
 
 def setParity(result):
     parity = result.count("1")
-    print parity
     if parity%2 == 0:
         registers.flag.update({"P":1})
     else:
