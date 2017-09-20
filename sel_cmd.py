@@ -21,3 +21,5 @@ def select(cmd):
 
     elif cmd[0] == "HLT":
         display.show()
+
+# def

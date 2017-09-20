@@ -4,3 +4,4 @@ flag = {'S': 0, 'Z': 0, 'AC': 0, 'P': 0,'CY':0}
 PC = 0
 SP = 0
 memory = {}
+label = {}

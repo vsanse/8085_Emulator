@@ -2,6 +2,7 @@ import registers
 import validate
 import set_flags
 
+
 def ADD(reg):
     a = int(registers.reg.get("A"),16)
     b = int(registers.reg.get(reg),16)

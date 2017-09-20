@@ -15,3 +15,9 @@ def show():
     for f,val in registers.flag.items():
         print f,val
     print "____________________________\n\n"
+
+
+    print "___________Labels___________"
+    for l, val in registers.label.items():
+        print l, val
+    print "____________________________\n\n"
