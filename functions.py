@@ -223,9 +223,7 @@ def MOV(reg1, reg2):
 
 
 def LDA(addr):
-    print registers.memory[addr]
     data = registers.memory[addr]
-    print data
     if validate.validate_data(int(data, 16)):
         registers.reg['A'] = data
     else:

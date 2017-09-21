@@ -7,14 +7,14 @@ def select(cmd):
     cmd = cmd.strip().split(" ")
     #  LOAD AND STORE COMMANDS
     if cmd[0] == "LDA":
-        functions.LDA(int(cmd[1]))
+        functions.LDA(cmd[1])
 
     elif cmd[0] == "MOV":
         regs = cmd[1].strip().split(",")
         functions.MOV(regs[0], regs[1])
 
     elif cmd[0] == "STA":
-        functions.STA(int(cmd[1]))
+        functions.STA(cmd[1])
 
     elif cmd[0] == "MVI":
         operand = cmd[1].strip().split(",")
