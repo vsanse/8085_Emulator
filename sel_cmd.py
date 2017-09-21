@@ -42,6 +42,12 @@ def select(cmd):
     elif cmd[0] == "SUB":
         functions.SUB(cmd[1])
 
+    elif cmd[0] == 'CMP':
+        functions.CMP(cmd[1])
+
+    elif cmd[0] == 'CMA':
+        functions.CMA()
+
     elif cmd[0] == "SET":
         operand = cmd[1].strip().split(",")
         functions.SET(operand[0], operand[1])

@@ -76,13 +76,15 @@ def MOV(reg1, reg2):
 def LDA(addr):
     while True:
         data = raw_input("Enter Data At Memory Location %d: " % addr)
-        if validate.validate_data(int(data,16)):
-            registers.memory[addr] = data
-            registers.reg["A"]= data
-            break
-        else:
-            print "Data Invalid. Please Retry"
-
+        try:
+            if validate.validate_data(int(data, 16)):
+                registers.memory[addr] = data
+                registers.reg["A"] = data
+                break
+            else:
+                print "Data Invalid. Please Retry"
+        except:
+            print "Invalid Data. Retry!!"
 
 def STA(addr):
     registers.memory[addr] = registers.reg["A"]
@@ -131,6 +133,42 @@ def STAX(register):
     if validate.validate_reg(register):
         a = extras.getPair(register, registers.reg_pair[register])
         registers.memory[a] = registers.reg['A']
+    else:
+        print "Invalid Register:", register
+        exit(1)
+
+
+#####################################################
+#               LOGICAL OPERATIONS                  #
+#####################################################
+
+def CMP(register):
+    if validate.validate_reg(register):
+        a_data = registers.reg['A']
+        if register == 'M':
+            a = extras.getPair('H', 'L')
+            if validate.validate_memory(a):
+                a = registers.memory[a]
+            else:
+                print "Invalid Memory:", a
+                exit(1)
+        else:
+            a = registers.reg[register]
+        if a_data < a:
+            registers.flag['CY'] = 1
+        elif a_data == a:
+            registers.flag['Z'] = 1
+        else:
+            registers.flag['CY'] = 0
+            registers.flag['Z'] = 0
+    else:
+        print "Invalid Register:", registers
+        exit(1)
+
+
+def CMA():
+    data = registers.reg['A']
+    registers.reg['A'] = format(255 - int(data, 16), '0x')
 
 
 #####################################################
