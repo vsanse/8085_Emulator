@@ -5,9 +5,12 @@ import validate
 
 
 def read_program(mem, count="", isCount=False):
-    ip = open("input.asm", "r")
+    file = raw_input("Enter program File path: ").strip()
+    ip = open(file, "r")
     hlt_mem = False
     for line in ip:
+        if line[0] == '\\':
+            continue
         if isCount:
             if count > 0:
                 count -= 1

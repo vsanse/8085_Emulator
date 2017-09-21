@@ -177,7 +177,6 @@ def DAD(reg1):
         a = int(registers.reg[reg1], 16)
         res = int(registers.reg['H'], 16) + a + c
         res = format(res, '02x')
-        print res
         if not validate.validate_data(int(res, 16)):
             res = set_flags.setCarry(res)
         registers.reg['H'] = res
@@ -224,17 +223,13 @@ def MOV(reg1, reg2):
 
 
 def LDA(addr):
-    while True:
-        data = raw_input("Enter Data At Memory Location %d: " % addr)
-        try:
-            if validate.validate_data(int(data, 16)):
-                registers.memory[addr] = data
-                registers.reg["A"] = data
-                break
-            else:
-                print "Data Invalid. Please Retry"
-        except:
-            print "Invalid Data. Retry!!"
+    print registers.memory[addr]
+    data = registers.memory[addr]
+    print data
+    if validate.validate_data(int(data, 16)):
+        registers.reg['A'] = data
+    else:
+        print "Data Invalid. Please Retry"
 
 def STA(addr):
     registers.memory[addr] = registers.reg["A"]
@@ -243,10 +238,7 @@ def STA(addr):
 def MVI(reg, data):
     if reg == 'M':
         a = extras.getPair('H','L')
-        if extras.chkMemory(a):
-            registers.memory[a] = data
-        else:
-            print "Invalid Memory Location At H,L"
+        registers.memory[a] = data
     elif validate.validate_reg(reg):
         registers.reg[reg] = data
     else: print "Invalid Register"
@@ -254,7 +246,7 @@ def MVI(reg, data):
 
 def LXI(register, data):
     if validate.validate_reg(register):
-        registers.reg[register] = data[0:2]
+        registers.reg[register] = data[:2]
         registers.reg[registers.reg_pair[register]] = data[2:]
     else:
         print "Invalid Register",register
@@ -294,16 +286,16 @@ def STAX(register):
 
 def CMP(register):
     if validate.validate_reg(register):
-        a_data = registers.reg['A']
+        a_data = int(registers.reg['A'], 16)
         if register == 'M':
             a = extras.getPair('H', 'L')
             if validate.validate_memory(a):
-                a = registers.memory[a]
+                a = int(registers.memory[a], 16)
             else:
                 print "Invalid Memory:", a
                 exit(1)
         else:
-            a = registers.reg[register]
+            a = int(registers.reg[register], 16)
         if a_data < a:
             registers.flag['CY'] = 1
         elif a_data == a:
@@ -325,24 +317,42 @@ def CMA():
 #            BRANCHING OPERATIONS                   #
 #####################################################
 
-def JMP():
-    pass
+def JMP(addr):
+    if extras.chkLable(addr):
+        return registers.label[addr]
+    elif extras.chkMemory(addr):
+        return addr
+    else:
+        print 'pointing to invalid memory:', addr
+        exit(1)
 
 
-def JC():
-    pass
+def JC(addr):
+    if registers.flag['CY'] == 1:
+        return JMP(addr)
+    else:
+        return
 
 
-def JNC():
-    pass
+def JNC(addr):
+    if registers.flag['CY'] == 0:
+        return JMP(addr)
+    else:
+        return
 
 
-def JNZ():
-    pass
+def JNZ(addr):
+    if registers.flag['Z'] == 0:
+        return JMP(addr)
+    else:
+        return
 
 
-def JZ():
-    pass
+def JZ(addr):
+    if registers.flag['Z'] == 1:
+        return JMP(addr)
+    else:
+        return
 
 
 #####################################################
