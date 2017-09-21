@@ -34,3 +34,7 @@ memory = oDict()
 
 # LABELS
 label = oDict()
+
+# DEBUGGER
+
+dBugOn = False

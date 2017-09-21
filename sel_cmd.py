@@ -3,7 +3,6 @@ import functions
 import instruction_sizes
 import registers
 
-
 def select(cmd):
     cmd = cmd.strip().split(" ")
     if cmd[0] == "LDA":
@@ -54,10 +53,12 @@ def select(cmd):
 
     elif cmd[0] == "HLT":
         display.show()
+        if registers.dBugOn == True:
+            return
         exit(1)
 
 
-def start_exec(mem):
+def start_exec(mem, isStep=False):
 
     while True:
         cmd = registers.memory[mem]
@@ -66,3 +67,10 @@ def start_exec(mem):
         mem_int+=instruction_sizes.getSize(t[0])
         mem = format(mem_int, "0x")
         select(cmd)
+        if registers.dBugOn == True and cmd.strip() == "HLT":
+            return
+        if isStep:
+            print "Executing:", cmd
+            query = raw_input("Press Enter For Next Instruction Execution(q to quit step execution):")
+            if query == "q" or query == "quit":
+                return
