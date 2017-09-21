@@ -1,5 +1,4 @@
 import registers
-import validate
 
 
 def setZero(result):
@@ -10,8 +9,12 @@ def setZero(result):
 
 
 def setCarry(result):
-    if not validate.validate_data(int(result,16)):
+    if int(result, 16) > 255:
         registers.flag.update({"CY":1})
+        return format((int(result, 16) - 256), '0x')
+    if int(result, 16) < 0:
+        registers.flag.update({"CY": 1})
+        return format((int(result, 16) + 256), '0x')
     else:
         registers.flag.update({"CY": 0})
 

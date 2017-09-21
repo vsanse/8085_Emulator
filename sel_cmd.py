@@ -5,6 +5,7 @@ import registers
 
 def select(cmd):
     cmd = cmd.strip().split(" ")
+    #  LOAD AND STORE COMMANDS
     if cmd[0] == "LDA":
         functions.LDA(int(cmd[1]))
 
@@ -35,11 +36,36 @@ def select(cmd):
     elif cmd[0] == "STAX":
         functions.STAX(cmd[1])
 
+    # ARITHMETIC COMMANDS
+
     elif cmd[0] == "ADD":
         functions.ADD(cmd[1])
 
     elif cmd[0] == "SUB":
         functions.SUB(cmd[1])
+
+    elif cmd[0] == "ADI":
+        functions.ADI(cmd[1])
+
+    elif cmd[0] == "INR":
+        functions.INR(cmd[1])
+
+    elif cmd[0] == "DCR":
+        functions.DCR(cmd[1])
+
+    elif cmd[0] == "INX":
+        functions.INX(cmd[1])
+
+    elif cmd[0] == "DCX":
+        functions.DCX(cmd[1])
+
+    elif cmd[0] == "DAD":
+        functions.DAD(cmd[1])
+
+    elif cmd[0] == "SUI":
+        functions.SUI(cmd[1])
+
+    # LOGICAL COMMANDS
 
     elif cmd[0] == 'CMP':
         functions.CMP(cmd[1])

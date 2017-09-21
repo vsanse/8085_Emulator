@@ -12,14 +12,24 @@ def ADD(register):
     if not validate.validate_reg(register):
         print "Invalid Register: %s"%register
         exit(1)
-    a = int(registers.reg["A"],16)
-    b = int(registers.reg[register],16)
+    a = int(registers.reg["A"], 16)
+    if register == "M":
+        b = extras.getPair('H', 'L')
+        if extras.chkMemory(b):
+            b = int(registers.reg[register], 16)
+        else:
+            print " Invalid Memory:", b
+            exit(1)
+    else:
+        b = int(registers.reg[register], 16)
     t = a + b
+    a = int(extras.getLowerNibble(format(a, '0x')), 2)
+    b = int(extras.getLowerNibble(format(b, '0x')), 2)
     if not validate.validate_data(t):
         print "\n////-----OverFlow Detected----////\n"
         t = format(t,"02x")
-        set_flags.setCarry(t)
-        set_flags.setFlags(a,b,t[1:],isAbnormalFlow=True)
+        t = set_flags.setCarry(t)
+        set_flags.setFlags(a, b, t, isAbnormalFlow=True)
         tmp = {"A": t[1:]}
     else:
         t = format(t, "02x")
@@ -33,21 +43,161 @@ def SUB(register):
         print "Invalid Register: %s"%register
         exit(1)
     a = int(registers.reg["A"],16)
-    b = int(registers.reg[register],16)
+    if register == "M":
+        b = extras.getPair('H', 'L')
+        if extras.chkMemory(b):
+            b = int(registers.reg[register], 16)
+        else:
+            print " Invalid Memory:", b
+            exit(1)
+    else:
+        b = int(registers.reg[register], 16)
     t = a - b
+    a = int(extras.getLowerNibble(format(a, '0x')), 2)
+    b = int(extras.getLowerNibble(format(b, '0x')), 2)
     if not validate.validate_data(t):
         print "\n////-----UnderFlow Detected----////\n"
         t = format(t,"02x")
-        set_flags.setCarry(t)
-        set_flags.setFlags(a, b, t[1:], isAbnormalFlow=True)
+        t = set_flags.setCarry(t)
+        set_flags.setFlags(a, b, t, isAbnormalFlow=True)
         tmp = {"A": t[1:]}
     else:
         t = format(t, "02x")
-        set_flags.setFlags(t)
+        set_flags.setFlags(a, b, t)
         tmp = {"A": t}
         set_flags.setFlags(a,b,t)
     registers.reg.update(tmp)
 
+
+def ADI(data):
+    a = int(registers.reg['A'], 16)
+    b = int(data, 16)
+    res = format((a + b), '02x')
+    a = int(extras.getLowerNibble(format(a, '0x')), 2)
+    b = int(extras.getLowerNibble(format(b, '0x')), 2)
+    if validate.validate_data(int(res, 16)):
+        registers.reg['A'] = res
+        set_flags.setFlags(a, b, res)
+    else:
+        print "\n Overflow Detected ADI", data
+        print "Register Data[A]:", registers.reg['A']
+        exit(1)
+
+
+def INR(register):
+    if validate.validate_reg(register):
+        if register == 'M':
+            a = extras.getPair('H', 'L')
+            if extras.chkMemory(a):
+                b = int(registers.memory[a], 16) + 1
+                if b > 255:
+                    b = 0
+                registers.memory[a] = format(b, '0x')
+            else:
+                print "invalid memory:", a
+                exit(1)
+        else:
+            b = int(registers.reg[register], 16) + 1
+            if b > 255:
+                b = 0
+            registers.reg[register] = format(b, '0x')
+
+
+def DCR(register):
+    if validate.validate_reg(register):
+        if register == 'M':
+            a = extras.getPair('H', 'L')
+            if extras.chkMemory(a):
+                b = int(registers.memory[a], 16) - 1
+                if b < 0:
+                    b = 255
+                registers.memory[a] = format(b, '0x')
+            else:
+                print "invalid memory:", a
+                exit(1)
+        else:
+            b = int(registers.reg[register], 16) - 1
+            if b < 0:
+                b = 255
+            registers.reg[register] = format(b, '0x')
+
+
+def INX(reg1):
+    if validate.validate_reg(reg1):
+        try:
+            reg2 = registers.reg_pair[reg1]
+        except:
+            print "invalid register pair", reg1
+            exit(1)
+        a = extras.getPair(reg1, reg2)
+        a = int(a, 16) + 1
+        if a > 65535:
+            a = 0
+        a = format(a, '04x')
+        registers.reg[reg1] = a[:2]
+        registers.reg[reg2] = a[2:]
+    else:
+        print "invalid register", reg1
+        exit(1)
+
+
+def DCX(reg1):
+    if validate.validate_reg(reg1):
+        try:
+            reg2 = registers.reg_pair[reg1]
+        except:
+            print "invalid register pair", reg1
+            exit(1)
+        a = extras.getPair(reg1, reg2)
+        a = int(a, 16) + 1
+        if a < 0:
+            a = 65535
+        a = format(a, '04x')
+        registers.reg[reg1] = a[:2]
+        registers.reg[reg2] = a[2:]
+    else:
+        print "invalid register", reg1
+        exit(1)
+
+
+def DAD(reg1):
+    if validate.validate_reg(reg1):
+        c = 0
+        try:
+            reg2 = registers.reg_pair[reg1]
+        except:
+            print "invalid register pair", reg1
+            exit(1)
+        a = int(registers.reg[reg2], 16)
+        res = int(registers.reg['L'], 16) + a
+        if res > 255:
+            c = 1
+            res -= 256
+        registers.reg['L'] = format(res, '02x')
+        a = int(registers.reg[reg1], 16)
+        res = int(registers.reg['H'], 16) + a + c
+        res = format(res, '02x')
+        print res
+        if not validate.validate_data(int(res, 16)):
+            res = set_flags.setCarry(res)
+        registers.reg['H'] = res
+    else:
+        print 'invalid register pair:', reg1
+        exit(1)
+
+
+def SUI(data):
+    a = int(registers.reg['A'], 16)
+    b = int(data, 16)
+    res = a - b
+    res = format(res, '02x')
+    if not validate.validate_data(int(res, 16)):
+        res = set_flags.setCarry(res)
+        set_flags.setFlags(a, b, res, isAbnormalFlow=True)
+    else:
+        set_flags.setFlags(a, b, res)
+
+    registers.reg['A'] = res
 
 #####################################################
 #               LOAD AND STORE                      #
@@ -169,6 +319,30 @@ def CMP(register):
 def CMA():
     data = registers.reg['A']
     registers.reg['A'] = format(255 - int(data, 16), '0x')
+
+
+#####################################################
+#            BRANCHING OPERATIONS                   #
+#####################################################
+
+def JMP():
+    pass
+
+
+def JC():
+    pass
+
+
+def JNC():
+    pass
+
+
+def JNZ():
+    pass
+
+
+def JZ():
+    pass
 
 
 #####################################################

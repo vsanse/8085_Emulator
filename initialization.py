@@ -10,12 +10,10 @@ def read_program(mem, count="", isCount=False):
     for line in ip:
         if isCount:
             if count > 0:
-                print count
                 count -= 1
             else:
                 registers.memory[mem] = "HLT"
                 hlt_mem = mem
-                print mem
                 break
         mem_int = int(mem,16)
         t = line.strip().split(" ")

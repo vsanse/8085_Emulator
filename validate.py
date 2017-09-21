@@ -18,8 +18,9 @@ def validate_reg(reg):
 
 def validate_regPair(reg1, reg2):
     import registers
-    if registers.reg_pair[reg1] == reg2:
-        return True
-    return False
-
-
+    try:
+        if registers.reg_pair[reg1] == reg2:
+            return True
+        return False
+    except:
+        return False
