@@ -1,11 +1,11 @@
 <a class="zip_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/zipball/master">Download this project as a .zip file</a>
 <a class="tar_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/tarball/master">Download this project as a tar.gz file</a>
 # 8085-Emulator by Vishal Sanserwal
-Simulator for 8085 which supports 25 most commonly used commands which are -  
-Load and Store - MOV , MVI , LXI , LDA , STA , LHLD , SHLD , STAX , XCHG   
-Arithmetic - ADD , ADI , SUB , INR , DCR , INX , DCX , DAD , SUI  
-Logical - CMA , CMP  
-Branching - JMP , JC , JNC , JZ , JNZ  
+Simulator for 8085 which supports 25 most commonly used commands which are - <br> 
+Load and Store - MOV , MVI , LXI , LDA , STA , LHLD , SHLD , STAX , XCHG   <br>
+Arithmetic - ADD , ADI , SUB , INR , DCR , INX , DCX , DAD , SUI  <br>
+Logical - CMA , CMP  <br>
+Branching - JMP , JC , JNC , JZ , JNZ  <br>
 One Additional command SET has been made to set data into valid memory locations (Eg - SET 2500,0A )  
 #### Debugger
 Program also has a debugger mode which you can select on the start of program.Currently it has following abilities:
@@ -30,30 +30,29 @@ Registers as well as flags and memory is taken as ordered dictionary.<br>
 Make sure all the statements are in CAPS.<br>
 For adding comments add '//' in start of instruction
 ###### Defining Label
-<code>LABEL: OPERATION OPERAND</code>
+<code>LABEL: OPERATION OPERAND</code><br>
+<code>GO: ADD B</code>
 ###### Writing Program on Command Line (Command Line Mode)
 Emulator has a mode to write program on terminal itself without providing file as input. This mode can be selected first time you start the emulator.<br>
 <strong>Note:</strong> To exit the writing mode enter "EOF"
 
 #### Sample Program
-<code>
-  //add 2 8 bit nos carry
-LXI H,2500
-MVI M,74
-INX H
-MVI M,AA
-MVI C,00
-LDA 2500
-MOV B,A
-LDA 2501
-ADD B
-JNC 2016
-INR C
-STA 2502
-MOV A,C
-STA 2503
-HLT
-  </code>
+<code>//add 2 8 bit nos carry</code><br>
+<code>LXI H,2500</code><br>
+<code>MVI M,74</code><br>
+<code>INX H</code><br>
+<code>MVI M,AA</code><br>
+<code>MVI C,00</code><br>
+<code>LDA 2500</code><br>
+<code>MOV B,A</code><br>
+<code>LDA 2501</code><br>
+<code>ADD B</code><br>
+<code>JNC 2016</code><br>
+<code>INR C</code><br>
+<code>STA 2502</code><br>
+<code>MOV A,C</code><br>
+<code>STA 2503</code><br>
+<code>HLT</code><br>
 
 ### To run program:
 $ python emulator.py
