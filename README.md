@@ -18,12 +18,17 @@ Program also has a debugger mode which you can select on the start of program.Cu
  <strong>p 2500</strong> will print the value at memory location x2500 if any.
   </li>
 <li><strong>quit or q</strong>               : quit the debugger</li>
-<li><strong>help</strong>                    : will show all the commands of debugger</li>
+<li><strong>help</strong>: will show all the commands of debugger</li>
 </ul>
 TheThe program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only</li>
 
 ## How This Works
 Emulator uses python-2 as a backend to perform all operations.
 Registers as well as flags and memory is taken as ordered dictionary.
+
+#### How to write program
+###### writing labels
+LABEL: OPERATION OPERAND
+
 ### To run program:
 $ python emulator.py
