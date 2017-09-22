@@ -1,7 +1,7 @@
 <a class="zip_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/zipball/master">Download this project as a .zip file</a>
 <a class="tar_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/tarball/master">Download this project as a tar.gz file</a>
 # 8085-Emulator by Vishal Sanserwal
-Simulator for 8085 which supports 25 most commonly used commands which are - <br> 
+Simulator for 8085 which supports 25 most commonly used commands which are -<br>
 Load and Store - MOV , MVI , LXI , LDA , STA , LHLD , SHLD , STAX , XCHG   <br>
 Arithmetic - ADD , ADI , SUB , INR , DCR , INX , DCX , DAD , SUI  <br>
 Logical - CMA , CMP  <br>
@@ -25,7 +25,7 @@ TheThe program will display contents of Registers A,B,C,D,E,H,L , flag Registers
 ## How This Works
 Emulator uses python-2 as a backend to perform all operations.
 Registers as well as flags and memory is taken as ordered dictionary.<br>
-<strong>Note:</strong> Make sure to end the program with "HLT" as final instruction for both command line as well as file mode.
+<strong>Note:Make sure to end the program with "HLT" as final instruction for both command line as well as file mode.</strong> 
 #### How to write program
 Make sure all the statements are in CAPS.<br>
 For adding comments add '//' in start of instruction
@@ -34,7 +34,7 @@ For adding comments add '//' in start of instruction
 <code>GO: ADD B</code>
 ###### Writing Program on Command Line (Command Line Mode)
 Emulator has a mode to write program on terminal itself without providing file as input. This mode can be selected first time you start the emulator.<br>
-<strong>Note:</strong> To exit the writing mode enter "EOF"
+<strong>Note:To exit the writing mode enter "EOF"</strong> 
 
 #### Sample Program
 <code>//add 2 8 bit nos carry</code><br>
