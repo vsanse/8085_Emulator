@@ -28,11 +28,16 @@ def read_program(mem, count="", isCount=False, isCmdLine=False):
             registers.memory[mem] = t[1]+" "+t[2]
             mem_int+=instruction_sizes.getSize(t[1])
             mem = format(mem_int,"0x")
+        if t[1] == "HLT":
+            registers.label[t[0][:-1]] = mem
+            registers.memory[mem] = t[1]
+            hlt_mem = mem
+            break
         elif len(t) == 2 or len(t) == 1:
             registers.memory[mem] = line.strip()
             mem_int += instruction_sizes.getSize(t[0])
             mem = format(mem_int, "0x")
-            if t[0] == "HLT":
+            if t[0] == "HLT" or t[1] == "HLT":
                 hlt_mem = mem
                 break
 
