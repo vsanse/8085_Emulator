@@ -13,8 +13,8 @@ Program also has a debugger mode which you can select on the start of program.Cu
   <li><strong>break or b [line Number]</strong>: it will set break point on the given line number .</li>
 <li><strong>run or r</strong>                : Run the program until it ends or breakoint is encountered.</li>
 <li><strong>step or s</strong>               : It will run the program one instruction at a time.</li>
-<li><strong>print or p</strong>[address or Register]: It prints the value of register or memory location for ex:
- <strong>p A </strong>will print the value of register A.
+<li><strong>print or p</strong>[address or Register]: It prints the value of register or memory location for ex:<br>
+ <strong>p A </strong>will print the value of register A.<br>
  <strong>p 2500</strong> will print the value at memory location x2500 if any.
   </li>
 <li><strong>quit or q</strong>               : quit the debugger</li>
