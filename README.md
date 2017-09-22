@@ -7,7 +7,7 @@ Arithmetic - ADD , ADI , SUB , INR , DCR , INX , DCX , DAD , SUI
 Logical - CMA , CMP  
 Branching - JMP , JC , JNC , JZ , JNZ  
 One Additional command SET has been made to set data into valid memory locations (Eg - SET 2500,0A )  
-## Debugger
+#### Debugger
 Program also has a debugger mode which you can select on the start of program.Currently it has following abilities:
 
 break or b <line Number>          :it will set break point on the given line number . <br>
