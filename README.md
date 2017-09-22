@@ -10,14 +10,14 @@ One Additional command SET has been made to set data into valid memory locations
 #### Debugger
 Program also has a debugger mode which you can select on the start of program.Currently it has following abilities:
 <ul>
-  <li><b>break or b [line Number]</b>: it will set break point on the given line number .</li>
-<li><b>run or r</b>                : Run the program until it ends or breakoint is encountered.</li>
-<li><b>step or s</b>               : It will run the program one instruction at a time.</li>
-<li><b>print or p</b>              : It prints the value of register or memory location for ex p A will print the value of register A.
-                              p x2500 will print the value at memory location x2500 if any.</li>
-<li><b>quit or q</b>               : quit the debugger</li>
-<li><b>help</b>                    : will show all the commands of debugger</li>
-<li><b>print or p [address or Register]</b> :The program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only</li>
+  <li><strong>break or b [line Number]</strong>: it will set break point on the given line number .</li>
+<li><strong>run or r</strong>                : Run the program until it ends or breakoint is encountered.</li>
+<li><strong>step or s</strong>               : It will run the program one instruction at a time.</li>
+<li><strong>print or p</strong>              : It prints the value of register or memory location for ex p A will print the value of register A.
+                              <strong>p x2500</strong> will print the value at memory location x2500 if any.</li>
+<li><strong>quit or q</strong>               : quit the debugger</li>
+<li><strong>help</strong>                    : will show all the commands of debugger</li>
+<li><strong>print or p [address or Register]</strong> :The program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only</li>
   </ul>
 ## How This Works
 Emulator uses python-2 as a backend to perform all operations.
