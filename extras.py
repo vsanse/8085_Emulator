@@ -1,7 +1,6 @@
 import registers
 import validate
 
-
 def getPair(reg1, reg2):
     if validate.validate_regPair(reg1,reg2):
         data1 = registers.reg[reg1]

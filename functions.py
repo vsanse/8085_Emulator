@@ -245,7 +245,8 @@ def MVI(reg, data):
 def LXI(register, data):
     if validate.validate_reg(register):
         registers.reg[register] = data[:2]
-        registers.reg[registers.reg_pair[register]] = data[2:]
+        if len(data[2:]) > 1:
+            registers.reg[registers.reg_pair[register]] = data[2:]
     else:
         print "Invalid Register",register
         exit(1)
