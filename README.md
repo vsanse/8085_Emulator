@@ -10,7 +10,7 @@ One Additional command SET has been made to set data into valid memory locations
 #### Debugger
 Program also has a debugger mode which you can select on the start of program.Currently it has following abilities:
 
-break or b <line Number where breakpoint is to set >        :it will set break point on the given line number . <br>
+break or b </line Number where breakpoint is to set >        :it will set break point on the given line number . <br>
 run or r :- Run the program until it ends or breakoint is encountered.<br>
 step or s:- It will run the program one instruction at a time.<br>
 print or p:-It prints the value of register or memory location for ex p A will print the value of register A.<br>
