@@ -21,7 +21,8 @@ def start(isCmdLine=False):
 
 
 if __name__ == "__main__":
-    qw = raw_input("Do you wish to write program here(y/n for providing file name/q-quit):")
+    qw = raw_input(
+        "Do you wish to start Command Line Program Writing Mode?\ny for start\nn for providing file name\nq-quit :")
     if qw == 'y' or qw == 'Y':
         print "Please enter EOF to end writing(Make sure you have last command of program as HLT)"
         f = open('input.asm', 'w')
