@@ -9,14 +9,16 @@ Branching - JMP , JC , JNC , JZ , JNZ
 One Additional command SET has been made to set data into valid memory locations (Eg - SET 2500,0A )  
 ## Debugger
 Program also has a debugger mode which you can select on the start of program.Currently it has following abilities:
-break or b <lineNumber>  place a breakpoint on given line.
 
- print Setting BreakPoint--------  break 3 or b 3"
-    print "Run Program (or till BreakPoint) ---  run or r "
-    print "Step by Step Execution      --------  step or s"
-    print "Print Data From Register or Mem) ---  print A or p 2500"
-    print "Quit Debugger               --------  quit or q"
-    print "Show Available Commands     --------  help"
+break or b <lineNumber>          :it will set break point on the given line number .
+run or r :- Run the program until it ends or breakoint is encountered.
+step or s:- It will run the program one instruction at a time.
+print or p:-It prints the value of register or memory location for ex p A will print the value of register A.
+ p x2500 will print the value at memory location x2500 if any.
+quit or q :- quit the debugger
+help:- will show all the commands of debugger
+print or p <address or Register> :
+
 
 
 The program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only
