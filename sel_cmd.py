@@ -6,68 +6,68 @@ import registers
 def select(cmd):
     cmd = cmd.strip().split(" ")
     #  LOAD AND STORE COMMANDS
-    if cmd[0] == "LDA":
+    if cmd[0] == "LDA" and len(cmd) > 1:
         functions.LDA(cmd[1])
 
-    elif cmd[0] == "MOV":
+    elif cmd[0] == "MOV" and len(cmd) > 1:
         regs = cmd[1].strip().split(",")
         functions.MOV(regs[0], regs[1])
 
-    elif cmd[0] == "STA":
+    elif cmd[0] == "STA" and len(cmd) > 1:
         functions.STA(cmd[1])
 
-    elif cmd[0] == "MVI":
+    elif cmd[0] == "MVI" and len(cmd) > 1:
         operand = cmd[1].strip().split(",")
         functions.MVI(operand[0], operand[1])
 
-    elif cmd[0] == "LXI":
+    elif cmd[0] == "LXI" and len(cmd) > 1:
         operand = cmd[1].strip().split(",")
         functions.LXI(operand[0],operand[1].strip())
 
-    elif cmd[0] == "LHLD":
+    elif cmd[0] == "LHLD" and len(cmd) > 1:
         functions.LHLD(cmd[1])
 
-    elif cmd[0] == "SHLD":
+    elif cmd[0] == "SHLD" and len(cmd) > 1:
         functions.SHLD(cmd[1])
 
     elif cmd[0] == "XCHG":
         functions.XCHG()
 
-    elif cmd[0] == "STAX":
+    elif cmd[0] == "STAX" and len(cmd) > 1:
         functions.STAX(cmd[1])
 
     # ARITHMETIC COMMANDS
 
-    elif cmd[0] == "ADD":
+    elif cmd[0] == "ADD" and len(cmd) > 1:
         functions.ADD(cmd[1])
 
-    elif cmd[0] == "SUB":
+    elif cmd[0] == "SUB" and len(cmd) > 1:
         functions.SUB(cmd[1])
 
-    elif cmd[0] == "ADI":
+    elif cmd[0] == "ADI" and len(cmd) > 1:
         functions.ADI(cmd[1])
 
-    elif cmd[0] == "INR":
+    elif cmd[0] == "INR" and len(cmd) > 1:
         functions.INR(cmd[1])
 
-    elif cmd[0] == "DCR":
+    elif cmd[0] == "DCR" and len(cmd) > 1:
         functions.DCR(cmd[1])
 
-    elif cmd[0] == "INX":
+    elif cmd[0] == "INX" and len(cmd) > 1:
         functions.INX(cmd[1])
 
-    elif cmd[0] == "DCX":
+    elif cmd[0] == "DCX" and len(cmd) > 1:
         functions.DCX(cmd[1])
 
-    elif cmd[0] == "DAD":
+    elif cmd[0] == "DAD" and len(cmd) > 1:
         functions.DAD(cmd[1])
 
-    elif cmd[0] == "SUI":
+    elif cmd[0] == "SUI" and len(cmd) > 1:
         functions.SUI(cmd[1])
 
     # LOGICAL COMMANDS
 
-    elif cmd[0] == 'CMP':
+    elif cmd[0] == 'CMP' and len(cmd) > 1:
         functions.CMP(cmd[1])
 
     elif cmd[0] == 'CMA':
@@ -75,24 +75,24 @@ def select(cmd):
 
     # BRANCHING COMMANDS
 
-    elif cmd[0] == 'JMP':
+    elif cmd[0] == 'JMP' and len(cmd) > 1:
         return functions.JMP(cmd[1])
 
-    elif cmd[0] == 'JC':
+    elif cmd[0] == 'JC' and len(cmd) > 1:
         return functions.JC(cmd[1])
 
-    elif cmd[0] == 'JNC':
+    elif cmd[0] == 'JNC' and len(cmd) > 1:
         return functions.JNC(cmd[1])
 
-    elif cmd[0] == 'JZ':
+    elif cmd[0] == 'JZ' and len(cmd) > 1:
         return functions.JZ(cmd[1])
 
-    elif cmd[0] == 'JNZ':
+    elif cmd[0] == 'JNZ' and len(cmd) > 1:
         return functions.JNZ(cmd[1])
 
     # EXTRA COMMANDS
 
-    elif cmd[0] == "SET":
+    elif cmd[0] == "SET" and len(cmd) > 1:
         operand = cmd[1].strip().split(",")
         functions.SET(operand[0], operand[1])
 
@@ -100,6 +100,9 @@ def select(cmd):
         display.show()
         if registers.dBugOn == True:
             return
+        exit(1)
+    else:
+        print "operand missing:", cmd
         exit(1)
 
 

@@ -14,14 +14,18 @@ def isDebuggerOn():
 
 
 def prnt(addr):
-    if validate.validate_reg(addr):
-        print registers.reg[addr]
+    try:
+        if validate.validate_reg(addr):
+            print registers.reg[addr]
 
-    elif extras.chkMemory(addr):
-        print registers.memory[addr]
+        elif extras.chkMemory(addr):
+            print registers.memory[addr]
 
-    else:
-        print " Invalid Memory or Register!!"
+        else:
+            print " Invalid Memory or Register!!"
+    except:
+        print "invalid command type help for list of commands!!"
+
 
 
 def hlp():
@@ -33,27 +37,27 @@ def hlp():
     print "Show Available Commands     --------  help"
 
 
-def step():
-    initialization.memInit(isStep=True)
+def step(isCmdLine=False):
+    initialization.memInit(isStep=True, isCmdLine=isCmdLine)
 
 
-def run(breakPoint):
+def run(breakPoint, isCmdLine=False):
     if breakPoint > 0:
-        initialization.memInit(count=breakPoint, isCount=True)
+        initialization.memInit(count=breakPoint, isCount=True, isCmdLine=isCmdLine)
     else:
-        initialization.memInit()
+        initialization.memInit(isCmdLine=isCmdLine)
 
 
-def startDebugger():
+def startDebugger(isCmdLine=False):
     while isDebuggerOn():
         cmd = raw_input("Enter Debugger Command: ").strip().split(" ")
-        if cmd[0] == "break" or cmd[0] == "b":
+        if (cmd[0] == "break" or cmd[0] == "b") and len(cmd) > 1:
             breakPoint = int(cmd[1])
         elif cmd[0] == "run" or cmd[0] == "r":
-            run(breakPoint)
+            run(breakPoint, isCmdLine=isCmdLine)
         elif cmd[0] == "step" or cmd[0] == "s":
-            step()
-        elif cmd[0] == "print" or cmd[0] == "p":
+            step(isCmdLine=isCmdLine)
+        elif (cmd[0] == "print" or cmd[0] == "p") and len(cmd) > 1:
             prnt(cmd[1])
         elif cmd[0] == "help":
             hlp()

@@ -4,8 +4,11 @@ import sel_cmd
 import validate
 
 
-def read_program(mem, count="", isCount=False):
-    file = raw_input("Enter program File path: ").strip()
+def read_program(mem, count="", isCount=False, isCmdLine=False):
+    if isCmdLine:
+        file = "input.asm"
+    else:
+        file = raw_input("Enter program File path: ").strip()
     ip = open(file, "r")
     hlt_mem = False
     for line in ip:
@@ -40,12 +43,12 @@ def read_program(mem, count="", isCount=False):
         return hlt_mem
 
 
-def memInit(count="", isCount=False, isStep=False):
+def memInit(count="", isCount=False, isStep=False, isCmdLine=False):
     while True:
         mem = raw_input("Enter Memory Location to Start With:")
         # mem_int = int(mem, 16)
         if validate.validate_memory(mem):
-            hlt_mem = read_program(mem, count, isCount)
+            hlt_mem = read_program(mem, count, isCount, isCmdLine=isCmdLine)
             sel_cmd.start_exec(mem, isStep)
             break
 
