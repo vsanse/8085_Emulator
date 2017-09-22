@@ -20,15 +20,40 @@ Program also has a debugger mode which you can select on the start of program.Cu
 <li><strong>quit or q</strong>               : quit the debugger</li>
 <li><strong>help</strong>: will show all the commands of debugger</li>
 </ul>
-TheThe program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only</li>
+TheThe program will display contents of Registers A,B,C,D,E,H,L , flag Registers and used memory Locations only
 
 ## How This Works
 Emulator uses python-2 as a backend to perform all operations.
-Registers as well as flags and memory is taken as ordered dictionary.
-
+Registers as well as flags and memory is taken as ordered dictionary.<br>
+<strong>Note:</strong> Make sure to end the program with "HLT" as final instruction for both command line as well as file mode.
 #### How to write program
-###### writing labels
-LABEL: OPERATION OPERAND
+Make sure all the statements are in CAPS.<br>
+For adding comments add '//' in start of instruction
+###### Defining Label
+<code>LABEL: OPERATION OPERAND</code>
+###### Writing Program on Command Line (Command Line Mode)
+Emulator has a mode to write program on terminal itself without providing file as input. This mode can be selected first time you start the emulator.<br>
+<strong>Note:</strong> To exit the writing mode enter "EOF"
+
+#### Sample Program
+<code>
+  //add 2 8 bit nos carry
+LXI H,2500
+MVI M,74
+INX H
+MVI M,AA
+MVI C,00
+LDA 2500
+MOV B,A
+LDA 2501
+ADD B
+JNC 2016
+INR C
+STA 2502
+MOV A,C
+STA 2503
+HLT
+  </code>
 
 ### To run program:
 $ python emulator.py
