@@ -1,7 +1,7 @@
 <a class="zip_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/zipball/master">Download this project as a .zip file</a>
 <a class="tar_download_link" href="https://github.com/vishu-chaudhary/8085_Emulator/tarball/master">Download this project as a tar.gz file</a>
 # 8085-Emulator by Vishal Sanserwal
-Simulator for 8085 which supports 25 most commonly used commands which are -<br>
+Emulator for 8085 which supports 25 most commonly used commands which are -<br>
 Load and Store - MOV , MVI , LXI , LDA , STA , LHLD , SHLD , STAX , XCHG   <br>
 Arithmetic - ADD , ADI , SUB , INR , DCR , INX , DCX , DAD , SUI  <br>
 Logical - CMA , CMP  <br>
