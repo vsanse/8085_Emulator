@@ -28,7 +28,7 @@ def read_program(mem, count="", isCount=False, isCmdLine=False):
             registers.memory[mem] = t[1]+" "+t[2]
             mem_int+=instruction_sizes.getSize(t[1])
             mem = format(mem_int,"0x")
-        if t[1] == "HLT":
+        elif len(t) and t[1] == "HLT":
             registers.label[t[0][:-1]] = mem
             registers.memory[mem] = t[1]
             hlt_mem = mem
