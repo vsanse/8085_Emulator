@@ -3,9 +3,7 @@ import initialization
 import registers
 import validate
 
-breakPoint = 0
-
-
+breakPoint = -1
 def isDebuggerOn():
     if registers.dBugOn:
         return True
@@ -42,7 +40,7 @@ def step(isCmdLine=False):
 
 
 def run(breakPoint, isCmdLine=False):
-    if breakPoint > 0:
+    if breakPoint >= 0:
         initialization.memInit(count=breakPoint, isCount=True, isCmdLine=isCmdLine)
     else:
         initialization.memInit(isCmdLine=isCmdLine)
@@ -54,7 +52,10 @@ def startDebugger(isCmdLine=False):
         if (cmd[0] == "break" or cmd[0] == "b") and len(cmd) > 1:
             breakPoint = int(cmd[1])
         elif cmd[0] == "run" or cmd[0] == "r":
-            run(breakPoint, isCmdLine=isCmdLine)
+            try:
+                run(breakPoint, isCmdLine=isCmdLine)
+            except:
+                run(-1,isCmdLine=isCmdLine)
         elif cmd[0] == "step" or cmd[0] == "s":
             step(isCmdLine=isCmdLine)
         elif (cmd[0] == "print" or cmd[0] == "p") and len(cmd) > 1:
@@ -66,3 +67,4 @@ def startDebugger(isCmdLine=False):
             return
         else:
             print "invalid command type help for list of commands!!"
+
